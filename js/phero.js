@@ -1,45 +1,45 @@
 const loadTabItem = async () => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/videos/categories`);
-    const data = await res.json();
-    // console.log(data.data);
-    const categoriesArr = data.data;
-    const tabContainer = document.getElementById('tab-container');
-    categoriesArr.forEach(category => {
-        // console.log(category);
-        const div = document.createElement('div');
-        div.classList = 'tab bg-[#25252526] rounded';
-        div.innerHTML = `
+  const res = await fetch(`https://openapi.programming-hero.com/api/videos/categories`);
+  const data = await res.json();
+  // console.log(data.data);
+  const categoriesArr = data.data;
+  const tabContainer = document.getElementById('tab-container');
+  categoriesArr.forEach(category => {
+    // console.log(category);
+    const div = document.createElement('div');
+    div.classList = 'tab bg-[#25252526] rounded';
+    div.innerHTML = `
         <div onclick="handleCategory('${category.category_id}')">${category.category}</div>
         
         `;
-        tabContainer.appendChild(div);
-    });
+    tabContainer.appendChild(div);
+  });
 
 }
 const handleCategory = async (id) => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
-    const data = await res.json();
-    // console.log(data.data);
-    const categoryItemById = data.data;
-    const cardContainer = document.getElementById('card-container');
-    cardContainer.innerHTML = '';
-    const emptyItem = document.getElementById('empty-item');
-    emptyItem.innerHTML = '';
-    // console.log(id);
-    if (id == 1005) {
-        const div = document.createElement('div');
-        div.innerHTML = `
+  const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
+  const data = await res.json();
+  // console.log(data.data);
+  const categoryItemById = data.data;
+  const cardContainer = document.getElementById('card-container');
+  cardContainer.innerHTML = '';
+  const emptyItem = document.getElementById('empty-item');
+  emptyItem.innerHTML = '';
+  // console.log(id);
+  if (id == 1005) {
+    const div = document.createElement('div');
+    div.innerHTML = `
         <div class="flex items-center mb-5 justify-center"><img src="./image/Icon.png" /></div>
         <h1 class="font-bold text-4xl">Oops!! Sorry, There is no <br>content here</h1>
         `
-        emptyItem.appendChild(div);
-    }
+    emptyItem.appendChild(div);
+  }
 
-    categoryItemById.forEach(item => {
-        // console.log(item);
-        const div = document.createElement('div');
-        div.classList = 'card bg-base-100 shadow-xl';
-        div.innerHTML = `
+  categoryItemById.forEach(item => {
+    // console.log(item);
+    const div = document.createElement('div');
+    div.classList = 'card bg-base-100 shadow-xl';
+    div.innerHTML = `
         <figure><img class="w-[312px] h-[200px]" src="${item.thumbnail}" /></figure>
         <div class="card-body flex gap-2 flex-row">
             <div>
@@ -66,9 +66,15 @@ const handleCategory = async (id) => {
             </div>   
         </div>
        `;
-        cardContainer.appendChild(div);
+    cardContainer.appendChild(div);
 
-    })
+  })
 }
+document.getElementById('blog-post').addEventListener('click', function(){
+  // console.log('hello');
+  window.location.href = 'blog.html';
+})
+
+
 handleCategory('1000')
 loadTabItem()
