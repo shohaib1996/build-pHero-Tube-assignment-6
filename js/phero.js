@@ -21,11 +21,22 @@ const handleCategory = async (id) => {
     const data = await res.json();
     // console.log(data.data);
     const categoryItemById = data.data;
-    const cardContainer =document.getElementById('card-container');
+    const cardContainer = document.getElementById('card-container');
     cardContainer.innerHTML = '';
+    const emptyItem = document.getElementById('empty-item');
+    emptyItem.innerHTML = '';
+    // console.log(id);
+    if (id == 1005) {
+        const div = document.createElement('div');
+        div.innerHTML = `
+        <div class="flex items-center mb-5 justify-center"><img src="./image/Icon.png" /></div>
+        <h1 class="font-bold text-4xl">Oops!! Sorry, There is no <br>content here</h1>
+        `
+        emptyItem.appendChild(div);
+    }
 
     categoryItemById.forEach(item => {
-        console.log(item);
+        // console.log(item);
         const div = document.createElement('div');
         div.classList = 'card bg-base-100 shadow-xl';
         div.innerHTML = `
@@ -48,7 +59,7 @@ const handleCategory = async (id) => {
                     <rect width="20" height="20" fill="white"/>
                   </clipPath>
                 </defs>
-              </svg>`  : '' }</span>    
+              </svg>`  : ''}</span>    
              </div>
                <p class='text-sm text-[#1717177A]'>${item.others.views}</p>
              </div>
