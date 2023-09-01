@@ -13,6 +13,7 @@ const loadTabItem = async () => {
         
         `;
     tabContainer.appendChild(div);
+    // console.log(category.category_id);
   });
 
 }
@@ -25,6 +26,9 @@ const handleCategory = async (id) => {
   cardContainer.innerHTML = '';
   const emptyItem = document.getElementById('empty-item');
   emptyItem.innerHTML = '';
+
+  // console.log(categoryItemById)
+
   // console.log(id);
   if (id == 1005) {
     const div = document.createElement('div');
@@ -39,8 +43,31 @@ const handleCategory = async (id) => {
     // console.log(item);
     const div = document.createElement('div');
     div.classList = 'card bg-base-100 shadow-xl';
+    const convertSecond = (seconds) => {
+      const hours = Math.floor((seconds % (24 * 60 * 60)) / 60);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      let result = '';
+      if (hours > 0) {
+        result += `${hours} hr${hours > 1 ? 's' : ''} `;
+      }
+      if (minutes > 0) {
+        result += `${minutes} min${minutes > 1 ? 's' : ''}`;
+
+      }
+      result += ' ago';
+      return result;
+    }
+
+    // convertSecond(parseFloat(item.others.posted_date));
+    console.log(convertSecond(parseFloat(item.others.posted_date)));
+
     div.innerHTML = `
-        <figure><img class="w-[312px] h-[200px]" src="${item.thumbnail}" /></figure>
+        <figure>
+          <div>
+            <div class="relative"><img  class="w-[312px] h-[200px]" src="${item.thumbnail}" /></div>
+            <div">${item?.others?.posted_date ? `<div class="bg-black text-white font-normal p-1 rounded-xl absolute text-sm right-5 top-[150px]">${convertSecond(parseFloat(item.others.posted_date))}</div>` : ''}</div>
+          </div>
+        </figure>
         <div class="card-body flex gap-2 flex-row">
             <div>
                <img class="w-12 h-12 rounded-full" src='${item.authors[0].profile_picture}'/>  
@@ -69,11 +96,13 @@ const handleCategory = async (id) => {
     cardContainer.appendChild(div);
 
   })
+
 }
-document.getElementById('blog-post').addEventListener('click', function(){
+document.getElementById('blog-post').addEventListener('click', function () {
   // console.log('hello');
   window.location.href = 'blog.html';
 })
+
 
 
 handleCategory('1000')
