@@ -13,80 +13,71 @@
     <section class="max-w-screen-xl mx-auto">
         <div class="">
             <h2 class="text-4xl font-bold text-center mt-5 mb-5">Discuss the scope of var, let, and const</h2>
-            <p><span class='font-bold'>var</span>, <span class="font-bold">let</span>, and <span
-                    class="font-bold">const</span> are keywords used in JavaScript to declare variables. Each of them
-                has a different scope, and their behavior varies in terms of hoisting, reassignment, and block-level
-                scope. </p>
+            <p>  In JavaScript, variables are declared using the keywords <span class='font-bold'>var</span>, <span class="font-bold">let</span>, and <span
+                class="font-bold">const</span>. Their behavior varies in terms of hoisting, reassignment, and block-level scope, and each of them has a unique scope. </p>
             <li class="list-decimal text-white bg-amber-500 p-5 font-bold">var:</li>
             <p><span class="font-bold"> Scope:</span> Function-scoped.</p>
-            <p><span class="font-bold">Hoisting:</span> Variables declared with var are hoisted to the top of their
-                containing function or global context. This means you can use them before they are declared, but they
-                will have an initial value of undefined.</p>
-            <p><span class="font-bold">Reassignment:</span> Variables declared with var can be reassigned.</p>
-            <p><span class="font-bold">Block Scope:</span> var doesn't have block-level scope. It's only scoped to the
-                function or global context.</p>
+            <p><span class="font-bold">Hoisting:</span> Variables defined using the var keyword are elevated to the top of the global context or the function that contains them. This means that even if you can use them before they are declared, their initial value will be undefined.</p>
+            <p><span class="font-bold">Reassignment:</span> Var-declared variables can be assigned new values..</p>
+            <p><span class="font-bold">Block Scope:</span> There is no block-level scope for var. It only has application to the function or global context.</p>
             <li class="list-decimal text-white bg-amber-500 p-5 font-bold">let:</li>
             <p class="font-bold"> Scope:</p> Block-scoped.
-            <p class="font-bold">Hoisting:</p> Variables declared with let are also hoisted, but they are not
-            initialized. If you try to
-            access them before declaration, you'll get a ReferenceError.
+            <p class="font-bold">Hoisting:</p> There is no block-level scope for var. It only has application to the function or global context.
             <p class="font-bold">Reassignment:</p> Variables declared with let can be reassigned.
-            <p class="font-bold">Block Scope:</p> let has block-level scope, meaning it's confined to the
-            block it's defined in, such as
-            loops, if statements, or functions.
+            <p class="font-bold">Block Scope:</p> Let has block-level scope, which means that it is limited to the block it is defined in, such as a loop, an if statement, or a function.
 
             <li class="list-decimal text-white bg-amber-500 p-5 font-bold">const:</li>
 
             <p class="font-bold"> Scope:</p> Block-scoped.
-            <p class="font-bold">Hoisting:</p> Variables declared with const are also hoisted, but like let,
-            they are not initialized.
-            Accessing them before declaration results in a ReferenceError.
-            <p class="font-bold">Reassignment:</p> Variables declared with const cannot be reassigned after they are
-            initialized. However,
-            for objects and arrays, the reference cannot be changed, but the content can be modified.
+            <p class="font-bold">Hoisting:</p> const variables are also raised, but like let variables, they are not initialized, so accessing them before declaration will result in a Reference Error.
+            <p class="font-bold">Reassignment:</p> You can't change variables declared with const after they've been initialized. But for objects and fields, you can't change the reference, but you can change the content.
         </div>
 
     </section>
     <section class="max-w-screen-xl mx-auto mt-12">
-        <h2 class="text-4xl font-bold text-center mt-5 mb-5">null and undefined are two distinct values in JavaScript,
-            and they are often used in different contexts for different purposes. </h2>
+        <h2 class="text-4xl font-bold text-center mt-5 mb-5">It's important to know that null and undefined are two different values in JavaScript, and they're often used in different ways for different reasons. </h2>
             <p class="text-2xl bg-purple-500 text-white max-w-lg mx-auto my-5 text-center font-bold">the use cases of null and undefined</p>
         <li class=" list-decimal bg-sky-400 text-white p-4 font-bold">null:</li>
         <div class="">
             <li class="font-bold">Intentional Absence of a Value: 
             </li>
-            <p>null is typically used to represent the intentional
-                absence of any object value or a placeholder for an object that doesn't exist or has no value yet.
+            <p>Most commonly, NULL is used to indicate the intentional absence of an object value or a substitute for an object that does not exist or does not yet have a value.
             </p>
             <li class="font-bold">Explicitly Assigned: 
             </li>
-            <p>You assign null to a variable or property when you want to
-                indicate that it has no meaningful value.</p>
+            <p>When you want to indicate that a variable or a property has no value, you assign null to it.</p>
             <li class="font-bold">Use Cases: 
             </li>
-            <p>Common use cases include initializing variables or properties,
-                indicating the absence of an object in an array, or resetting a variable or property to a non-value
-                state.</p>
+            <p>Some of the most common ways to initialize variables or properties include:
+
+                marking an object as not being in an array
+                
+                marking a variable or a property as not having a value
+                
+                marking it as not having a state
+                </p>
         </div>
         <li class=" list-decimal bg-sky-400 text-white p-4 font-bold">undefined:</li>
         <div class="">
             <li class="font-bold">Default Initial Value:
             </li>
-            <p>Variables that are declared but not assigned a value are automatically assigned undefined. Function
-                parameters that are not provided with an argument also have the value undefined.</p>
+            <p>Declared variables are automatically assigned an undefined value. Function parameters that do not have an argument also have an undefined value.</p>
             <li class="font-bold">Property Value Not Present:
             </li>
             <p>When you access an object property that doesn't exist, it returns undefined.</p>
             <li class="font-bold">Use Cases:
             </li>
-            <p> Common use cases include checking if a variable has been initialized, checking if a function argument
-                has been provided, and checking if an object property exists.</p>
+            <p> In general, it is used to check whether a variable has been set, if a function argument has been passed, and if an object property has been passed.</p>
         </div>
 
     </section>
     <section class="max-w-screen-xl mx-auto mt-12 mb-5">
         <h2 class="text-4xl font-bold text-center mt-5 mb-5 bg-lime-500 text-white p-5 ">What do you mean by REST API?</h2>
-        <p class="text-center">REST API, which stands for Representational State Transfer Application Programming Interface, is a set of architectural principles and constraints used for designing and interacting with web services. It is a popular approach for building web services that are scalable, maintainable, and easy to understand. RESTful APIs are commonly used in web and mobile applications to facilitate communication between different software systems over the internet.</p>
+        <p class="text-center">REST API, which stands for Representational State Transfer Application Programming Interface, is a collection of architectural concepts and constraints that are used to design and interact with web services.
+
+REST API is a popular way to build web services that are easy to scale, easy to maintain, and easy to use.
+
+Web and mobile applications often use REST API to communicate between software systems over the Internet.</p>
 
     </section>
    

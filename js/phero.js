@@ -1,23 +1,58 @@
 const loadTabItem = async () => {
   const res = await fetch(`https://openapi.programming-hero.com/api/videos/categories`);
   const data = await res.json();
-  // console.log(data.data);
+  console.log(data.data);
   const categoriesArr = data.data;
   const tabContainer = document.getElementById('tab-container');
-  categoriesArr.forEach(category => {
+  // let previousClickedDiv = null;
+  categoriesArr.forEach((category) => {
     // console.log(category);
     const div = document.createElement('div');
-    div.classList = 'tab bg-[#25252526] rounded';
+    div.classList = 'tab text-sky-600 font-bold bg-[#25252526] rounded';
     div.innerHTML = `
-        <div onclick="handleCategory('${category.category_id}')">${category.category}</div>
+        <div onclick="handleCategory('${category.category_id}'); tabHandle(this)">${category.category}</div>
         
         `;
+    // div.addEventListener('click', () => {
+    //   if (previousClickedDiv) {
+    //     // Restore the background color of the previously clicked div
+    //     previousClickedDiv.style.backgroundColor = '#25252526';
+    //   }
+      
+    //   // Change the background color of the clicked div to red
+    //   div.style.backgroundColor = 'red';
+
+    //   // Update the previousClickedDiv to the currently clicked div
+    //   previousClickedDiv = div;
+    // });
+    // if (index === 0) {
+    //   div.style.backgroundColor = 'red';
+    //   previousClickedDiv = div;
+    // }
+    
+   
     tabContainer.appendChild(div);
     // console.log(category.category_id);
   });
+  // return categoriesArr;
 
 }
-const handleCategory = async (id) => {
+
+function tabHandle(element){
+
+  element.classList.add('');
+}
+
+function parseViews(views) {
+  const numericPart = views.slice(0, -1);
+  return numericPart;
+}
+let sortId = '';
+console.log(sortId);
+const handleCategory = async (id, isClicked) => {
+  // console.log(id);
+  sortId = id;
+
   const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
   const data = await res.json();
   // console.log(data.data);
@@ -29,7 +64,7 @@ const handleCategory = async (id) => {
 
   // console.log(categoryItemById)
 
-  // console.log(id);
+
   if (id == 1005) {
     const div = document.createElement('div');
     div.innerHTML = `
@@ -39,13 +74,19 @@ const handleCategory = async (id) => {
     emptyItem.appendChild(div);
   }
 
+  if (isClicked) {
+
+    categoryItemById.sort((a, b) => parseViews(b.others.views) - parseViews(a.others.views));
+  }
+
   categoryItemById.forEach(item => {
     // console.log(item);
     const div = document.createElement('div');
     div.classList = 'card bg-base-100 shadow-xl';
     const convertSecond = (seconds) => {
-      const hours = Math.floor((seconds % (24 * 60 * 60)) / 60);
-      const minutes = Math.floor((seconds % 3600) / 60);
+      const hours = Math.floor((seconds / ( 60 * 60))); 
+      const extraSecond = seconds % 3600;
+      const minutes = Math.floor(extraSecond / 60);
       let result = '';
       if (hours > 0) {
         result += `${hours} hr${hours > 1 ? 's' : ''} `;
@@ -59,13 +100,13 @@ const handleCategory = async (id) => {
     }
 
     // convertSecond(parseFloat(item.others.posted_date));
-    console.log(convertSecond(parseFloat(item.others.posted_date)));
+    // console.log(convertSecond(parseFloat(item.others.posted_date)));
 
     div.innerHTML = `
         <figure>
           <div>
             <div class="relative"><img  class="w-[312px] h-[200px]" src="${item.thumbnail}" /></div>
-            <div">${item?.others?.posted_date ? `<div class="bg-black text-white font-normal p-1 rounded-xl absolute text-sm right-5 top-[150px]">${convertSecond(parseFloat(item.others.posted_date))}</div>` : ''}</div>
+            <div">${item?.others?.posted_date ? `<div class="bg-black text-white font-normal p-1 rounded-xl absolute text-sm right-14 lg:right-5  top-[150px]">${convertSecond(parseFloat(item.others.posted_date))}</div>` : ''}</div>
           </div>
         </figure>
         <div class="card-body flex gap-2 flex-row">
@@ -96,12 +137,20 @@ const handleCategory = async (id) => {
     cardContainer.appendChild(div);
 
   })
+ 
 
 }
+
+const handleSortBtn = () => {
+  handleCategory(sortId, true);
+}
+
 document.getElementById('blog-post').addEventListener('click', function () {
   // console.log('hello');
   window.location.href = 'blog.html';
 })
+
+
 
 
 
