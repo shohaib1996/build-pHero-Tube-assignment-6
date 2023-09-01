@@ -1,17 +1,16 @@
 const loadTabItem = async () => {
-  const res = await fetch(`https://openapi.programming-hero.com/api/videos/categories`);
-  const data = await res.json();
-  console.log(data.data);
-  const categoriesArr = data.data;
-  const tabContainer = document.getElementById('tab-container');
-  const handleTabClick = (div) => {
-    // Remove the 'tab-active' class from all tabs
+    const res = await fetch(`https://openapi.programming-hero.com/api/videos/categories`);
+    const data = await res.json();
+    console.log(data.data);
+    const categoriesArr = data.data;
+    const tabContainer = document.getElementById('tab-container');
+    const handleTabClick = (div) => {
+    // catch every element by querySelectorAll
     const tabs = tabContainer.querySelectorAll('.tab');
     tabs.forEach(tab => {
       tab.classList.remove('bg-red-600');
     });
 
-    // Add the 'tab-active' class to the clicked tab
     div.classList.add('bg-red-600');
   }
   categoriesArr.forEach((category, index) => {
@@ -38,13 +37,14 @@ const loadTabItem = async () => {
 }
 
 function parseViews(views) {
-  const numericPart = views.slice(0, -1);
-  return numericPart;
+  const numberPart = views.slice(0, -1);
+  return numberPart;
 }
 let sortId = '';
-console.log(sortId);
+// console.log(sortId);
 const handleCategory = async (id, isClicked) => {
   // console.log(id);
+  // updating the id to a global variable
   sortId = id;
 
   const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
@@ -70,7 +70,9 @@ const handleCategory = async (id, isClicked) => {
 
   if (isClicked) {
 
-    categoryItemById.sort((a, b) => parseViews(b.others.views) - parseViews(a.others.views));
+    categoryItemById.sort((a, b) => {
+      return parseViews(b.others.views) - parseViews(a.others.views);
+    })
   }
 
   categoryItemById.forEach(item => {
@@ -78,9 +80,9 @@ const handleCategory = async (id, isClicked) => {
     const div = document.createElement('div');
     div.classList = 'card bg-base-100 shadow-xl';
     const convertSecond = (seconds) => {
-      const hours = Math.floor((seconds / (60 * 60)));
-      const extraSecond = seconds % 3600;
-      const minutes = Math.floor(extraSecond / 60);
+      const hours = Math.floor((seconds / (60 * 60)));   // 1hr = 60 * 60
+      const extraSecond = seconds % 3600;                 // remaining second
+      const minutes = Math.floor(extraSecond / 60);         // 1min = 60s
       let result = '';
       if (hours > 0) {
         result += `${hours} hr${hours > 1 ? 's' : ''} `;
@@ -100,7 +102,7 @@ const handleCategory = async (id, isClicked) => {
         <figure>
           <div>
             <div class="relative"><img  class="w-[312px] h-[200px]" src="${item.thumbnail}" /></div>
-            <div">${item?.others?.posted_date ? `<div class="bg-black text-white font-normal p-1 rounded-xl absolute text-sm right-14 lg:right-5  top-[150px]">${convertSecond(parseFloat(item.others.posted_date))}</div>` : ''}</div>
+            <div">${item?.others?.posted_date ? `<div class="bg-black text-white font-normal p-1 rounded-xl absolute text-sm right-14 md:right-16 lg:right-5  top-[150px]">${convertSecond(parseFloat(item.others.posted_date))}</div>` : ''}</div>
           </div>
         </figure>
         <div class="card-body flex gap-2 flex-row">
