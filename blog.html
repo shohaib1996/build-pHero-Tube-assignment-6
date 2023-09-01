@@ -10,6 +10,20 @@
 </head>
 
 <body>
+    <header class="max-w-screen-xl mx-auto mt-5 mb-5">
+        <nav class="mb-2 ">
+            <div class="navbar bg-base-100 justify-between p-6 space-y-3 lg:space-y-0 flex-col lg:flex-row">
+                <div class="">
+                    <img src="./image/Logo.png" alt="" srcset="">
+                </div>
+                
+                <div class="">
+                    <button  id="home-btn" class="btn bg-lime-500 px-6 text-white">Home</button>
+                </div>
+            </div>
+        </nav>
+        <hr>
+    </header>
     <section class="max-w-screen-xl mx-auto">
         <div class="">
             <h2 class="text-4xl font-bold text-center mt-5 mb-5">Discuss the scope of var, let, and const</h2>
@@ -80,6 +94,13 @@ REST API is a popular way to build web services that are easy to scale, easy to 
 Web and mobile applications often use REST API to communicate between software systems over the Internet.</p>
 
     </section>
+
+    <script>
+        document.getElementById('home-btn').addEventListener('click', function(){
+            window.location.href = 'index.html';
+
+        })
+    </script>
    
 
 </body>

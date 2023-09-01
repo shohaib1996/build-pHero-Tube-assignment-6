@@ -4,43 +4,37 @@ const loadTabItem = async () => {
   console.log(data.data);
   const categoriesArr = data.data;
   const tabContainer = document.getElementById('tab-container');
-  // let previousClickedDiv = null;
-  categoriesArr.forEach((category) => {
+  const handleTabClick = (div) => {
+    // Remove the 'tab-active' class from all tabs
+    const tabs = tabContainer.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.classList.remove('bg-red-600');
+    });
+
+    // Add the 'tab-active' class to the clicked tab
+    div.classList.add('bg-red-600');
+  }
+  categoriesArr.forEach((category, index) => {
     // console.log(category);
     const div = document.createElement('div');
-    div.classList = 'tab text-sky-600 font-bold bg-[#25252526] rounded';
+    div.classList = 'tab text-white font-bold bg-lime-400 rounded';
     div.innerHTML = `
-        <div onclick="handleCategory('${category.category_id}'); tabHandle(this)">${category.category}</div>
+        <div onclick="handleCategory('${category.category_id}')">${category.category}</div>
         
         `;
-    // div.addEventListener('click', () => {
-    //   if (previousClickedDiv) {
-    //     // Restore the background color of the previously clicked div
-    //     previousClickedDiv.style.backgroundColor = '#25252526';
-    //   }
-      
-    //   // Change the background color of the clicked div to red
-    //   div.style.backgroundColor = 'red';
+    div.addEventListener('click', () => {
+      handleCategory(category.category_id);
+      handleTabClick(div);
+    });
+    if (index === 0) {
+      div.classList.add('bg-red-600');
+    }
 
-    //   // Update the previousClickedDiv to the currently clicked div
-    //   previousClickedDiv = div;
-    // });
-    // if (index === 0) {
-    //   div.style.backgroundColor = 'red';
-    //   previousClickedDiv = div;
-    // }
-    
-   
     tabContainer.appendChild(div);
     // console.log(category.category_id);
   });
   // return categoriesArr;
 
-}
-
-function tabHandle(element){
-
-  element.classList.add('');
 }
 
 function parseViews(views) {
@@ -84,7 +78,7 @@ const handleCategory = async (id, isClicked) => {
     const div = document.createElement('div');
     div.classList = 'card bg-base-100 shadow-xl';
     const convertSecond = (seconds) => {
-      const hours = Math.floor((seconds / ( 60 * 60))); 
+      const hours = Math.floor((seconds / (60 * 60)));
       const extraSecond = seconds % 3600;
       const minutes = Math.floor(extraSecond / 60);
       let result = '';
@@ -137,7 +131,7 @@ const handleCategory = async (id, isClicked) => {
     cardContainer.appendChild(div);
 
   })
- 
+
 
 }
 
